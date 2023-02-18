@@ -1,0 +1,102 @@
+const str str_0 = "\n"
+
+var int interesting = 1
+const int MOD = 100005
+const int SUM = 777777
+int one()
+ret 1
+
+int one2()
+para int i
+t0 = 2 * i
+t1 = t0 + 1
+ret i
+
+call one
+call one
+call one
+t0 = RET / RET
+t1 = RET + t0
+call one
+t2 = t1 - RET
+ret t2
+
+int tRue()
+var int n = -99
+call one
+t0 = n + 1
+n = t0
+ret n
+
+call one
+push RET
+call one2
+t0 = n + 1
+n = t0
+push n
+call one2
+t0 = n + RET
+call one
+t1 = RET + 1
+push t1
+call one2
+push RET
+call one2
+t0 = n + 1
+n = t0
+ret n
+
+ret n
+
+int fAlse()
+call tRue
+var int x = RET
+call tRue
+call tRue
+t0 = RET * RET
+t1 = x + t0
+x = t1
+printf x
+printf str_0
+call tRue
+t0 = x % RET
+ret t0
+
+int main()
+var int x
+scanf t0
+x = t0
+t0 = x % 100005
+call tRue
+call fAlse
+t1 = RET + RET
+call tRue
+printf RET
+printf str_0
+t0 = x + 100
+x = t0
+t0 = x / 100005
+t1 = t0 + 100005
+call tRue
+call fAlse
+t2 = RET + RET
+t0 = x - 1
+x = t0
+call tRue
+t0 = RET + x
+printf t0
+printf str_0
+t0 = x / 100005
+call tRue
+call fAlse
+t1 = RET + RET
+t0 = x - 1
+x = t0
+call tRue
+t0 = RET + x
+printf t0
+printf str_0
+printf x
+printf str_0
+ret 0
+

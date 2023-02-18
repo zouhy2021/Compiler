@@ -1,0 +1,75 @@
+int interesting = 1;
+const int MOD = 100005;
+const int SUM = 777777;
+
+int one(){
+    return 1;
+}
+
+int one2(int i){
+    if(i > 2*i+1){
+        return i;
+    }
+    return one() + one()/one() - one();
+}
+
+
+int tRue(){
+    int n = -99;
+    while(1==1){
+        if(n < one()){
+            n = n + 1;
+        }
+        else {
+            return n;
+        }
+    }
+    while(1==1){
+        if(n < one2(one())){
+            n = n + 1;
+        }
+        else {
+            break;
+        }
+    }
+    while(1==1){
+        if(n+one2(n) < one2(one2(one()+1))){
+            n = n + 1;
+        }
+        else {
+            return n;
+        }
+    }
+    return n;
+}
+
+int fAlse(){
+	int x = tRue();
+	while(!0){
+		x = x + tRue()*tRue();
+		printf("%d\n",x);
+		if(x > SUM%123){
+			break;
+		}
+	}
+	return x % tRue();
+}
+
+int main(){
+    int x;
+    x = getint();
+    while(x%MOD < tRue()+fAlse()){
+        printf("%d\n",tRue());
+        x = x + 100;
+        while(x/MOD+MOD < tRue()+fAlse()){
+            x = x - 1;
+            printf("%d\n",tRue()+x);
+            while(x/MOD < tRue()+fAlse()){
+                x = x - 1;
+                printf("%d\n",tRue()+x);
+            }
+        }
+    }
+    printf("%d\n",x);
+    return 0;
+}

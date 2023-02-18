@@ -1,0 +1,606 @@
+.data
+str_0:.asciiz"\n"
+
+.text
+
+addi $sp,$sp,-4 # 分配内存
+li $t8,1
+sw $t8,0($sp)
+
+j main
+
+one:
+li $v0,1
+addi $sp,$sp,0 # int 减去局部变量
+jr $ra
+
+one2:
+lw $t8,4($sp)
+li $t9,2
+mul $t0,$t9,$t8
+add $t0,$t0,1
+lw $t8,4($sp)
+bgt $t8,$t0,label_0
+li $t0,0
+j label_1
+label_0:
+li $t0,1
+label_1:
+beqz $t0,label_2 # 条件值为此寄存器
+lw $v0,4($sp)
+addi $sp,$sp,0 # int 减去局部变量
+jr $ra
+
+addi $sp,$sp,0
+label_2:
+addi $sp,$sp,-4
+sw $ra,0($sp)
+
+jal one
+
+lw $ra,0($sp)
+addi $sp,$sp,4
+addi $sp,$sp,0 #消参
+addi $sp,$sp,-4 # 存函数$v0
+sw $v0,0($sp)
+move $v1,$v0
+addi $sp,$sp,-4
+sw $ra,0($sp)
+
+jal one
+
+lw $ra,0($sp)
+addi $sp,$sp,4
+addi $sp,$sp,0 #消参
+addi $sp,$sp,-4 # 存函数$v0
+sw $v0,0($sp)
+addi $sp,$sp,-4
+sw $ra,0($sp)
+
+jal one
+
+lw $ra,0($sp)
+addi $sp,$sp,4
+addi $sp,$sp,0 #消参
+addi $sp,$sp,-4 # 存函数$v0
+sw $v0,0($sp)
+lw $v1,4($sp)
+addi $sp,$sp,8 # 取函数$v0,$v1
+div $v1,$v0
+mflo $t0
+lw $v0,0($sp)
+addi $sp,$sp,4 # 取函数$v0
+add $t0,$v0,$t0
+addi $sp,$sp,-4 # 存寄存器
+sw $t0,0($sp)
+addi $sp,$sp,-4
+sw $ra,0($sp)
+
+jal one
+
+lw $ra,0($sp)
+addi $sp,$sp,4
+addi $sp,$sp,0 #消参
+lw $t0,0($sp) # 取寄存器
+addi $sp,$sp,4
+addi $sp,$sp,-4 # 存函数$v0
+sw $v0,0($sp)
+addi $sp,$sp,4 # 取函数$v0
+sub $t1,$t0,$v0
+move $v0,$t1
+addi $sp,$sp,0 # int 减去局部变量
+jr $ra
+
+tRue:
+addi $sp,$sp,-4 # 分配内存
+li $t8,-99
+sw $t8,0($sp)
+label_3:
+li $t8,1 # 条件值
+beqz $t8,label_4
+addi $sp,$sp,-4
+sw $ra,0($sp)
+
+jal one
+
+lw $ra,0($sp)
+addi $sp,$sp,4
+addi $sp,$sp,0 #消参
+addi $sp,$sp,-4 # 存函数$v0
+sw $v0,0($sp)
+move $v1,$v0
+lw $t8,4($sp)
+addi $sp,$sp,4 # 取函数$v0
+blt $t8,$v0,label_5
+li $t0,0
+j label_6
+label_5:
+li $t0,1
+label_6:
+beqz $t0,label_7 # 条件值为此寄存器
+lw $t8,0($sp)
+add $t0,$t8,1
+sw $t0,0($sp)
+addi $sp,$sp,0
+j label_8
+label_7:
+lw $v0,0($sp)
+addi $sp,$sp,0 # int 减去局部变量
+jr $ra
+
+addi $sp,$sp,0
+label_8:
+addi $sp,$sp,0
+j label_3
+label_4:
+label_9:
+li $t8,1 # 条件值
+beqz $t8,label_10
+addi $sp,$sp,-4
+sw $ra,0($sp)
+
+jal one
+
+lw $ra,0($sp)
+addi $sp,$sp,4
+addi $sp,$sp,0 #消参
+addi $sp,$sp,-4 # 存函数$v0
+sw $v0,0($sp)
+move $v1,$v0
+addi $sp,$sp,-4 # 存参数
+addi $sp,$sp,4 # 取函数$v0
+sw $v0,0($sp)
+addi $sp,$sp,-4
+sw $ra,0($sp)
+
+jal one2
+
+lw $ra,0($sp)
+addi $sp,$sp,4
+addi $sp,$sp,4 #消参
+addi $sp,$sp,-4 # 存函数$v0
+sw $v0,0($sp)
+move $v1,$v0
+lw $t8,4($sp)
+addi $sp,$sp,4 # 取函数$v0
+blt $t8,$v0,label_11
+li $t0,0
+j label_12
+label_11:
+li $t0,1
+label_12:
+beqz $t0,label_13 # 条件值为此寄存器
+lw $t8,0($sp)
+add $t0,$t8,1
+sw $t0,0($sp)
+addi $sp,$sp,0
+j label_14
+label_13:
+j label_10
+addi $sp,$sp,0
+label_14:
+addi $sp,$sp,0
+j label_9
+label_10:
+label_15:
+li $t8,1 # 条件值
+beqz $t8,label_16
+addi $sp,$sp,-4 # 存参数
+lw $t8,4($sp)
+sw $t8,0($sp)
+addi $sp,$sp,-4
+sw $ra,0($sp)
+
+jal one2
+
+lw $ra,0($sp)
+addi $sp,$sp,4
+addi $sp,$sp,4 #消参
+addi $sp,$sp,-4 # 存函数$v0
+sw $v0,0($sp)
+addi $sp,$sp,4 # 取函数$v0
+lw $t8,0($sp)
+add $t0,$t8,$v0
+addi $sp,$sp,-4 # 存寄存器
+sw $t0,0($sp)
+addi $sp,$sp,-4 # 存寄存器
+sw $t0,0($sp)
+addi $sp,$sp,-4 # 存寄存器
+sw $t0,0($sp)
+addi $sp,$sp,-4
+sw $ra,0($sp)
+
+jal one
+
+lw $ra,0($sp)
+addi $sp,$sp,4
+addi $sp,$sp,0 #消参
+lw $t0,0($sp) # 取寄存器
+addi $sp,$sp,4
+addi $sp,$sp,-4 # 存函数$v0
+sw $v0,0($sp)
+move $v1,$v0
+addi $sp,$sp,4 # 取函数$v0
+add $t1,$v0,1
+addi $sp,$sp,-4 # 存参数
+sw $t1,0($sp)
+addi $sp,$sp,-4
+sw $ra,0($sp)
+
+jal one2
+
+lw $ra,0($sp)
+addi $sp,$sp,4
+addi $sp,$sp,4 #消参
+lw $t0,0($sp) # 取寄存器
+addi $sp,$sp,4
+addi $sp,$sp,-4 # 存函数$v0
+sw $v0,0($sp)
+move $v1,$v0
+addi $sp,$sp,-4 # 存参数
+addi $sp,$sp,4 # 取函数$v0
+sw $v0,0($sp)
+addi $sp,$sp,-4
+sw $ra,0($sp)
+
+jal one2
+
+lw $ra,0($sp)
+addi $sp,$sp,4
+addi $sp,$sp,4 #消参
+lw $t0,0($sp) # 取寄存器
+addi $sp,$sp,4
+addi $sp,$sp,-4 # 存函数$v0
+sw $v0,0($sp)
+move $v1,$v0
+addi $sp,$sp,4 # 取函数$v0
+blt $t0,$v0,label_17
+li $t0,0
+j label_18
+label_17:
+li $t0,1
+label_18:
+beqz $t0,label_19 # 条件值为此寄存器
+lw $t8,0($sp)
+add $t0,$t8,1
+sw $t0,0($sp)
+addi $sp,$sp,0
+j label_20
+label_19:
+lw $v0,0($sp)
+addi $sp,$sp,0 # int 减去局部变量
+jr $ra
+
+addi $sp,$sp,0
+label_20:
+addi $sp,$sp,0
+j label_15
+label_16:
+lw $v0,0($sp)
+addi $sp,$sp,4 # int 减去局部变量
+jr $ra
+
+fAlse:
+addi $sp,$sp,-4
+sw $ra,0($sp)
+
+jal tRue
+
+lw $ra,0($sp)
+addi $sp,$sp,4
+addi $sp,$sp,0 #消参
+addi $sp,$sp,-4 # 存函数$v0
+sw $v0,0($sp)
+move $v1,$v0
+addi $sp,$sp,-4 # 分配内存
+addi $sp,$sp,4 # 取函数$v0
+sw $v0,0($sp)
+label_21:
+li $t8,1 # 条件值
+beqz $t8,label_22
+addi $sp,$sp,-4
+sw $ra,0($sp)
+
+jal tRue
+
+lw $ra,0($sp)
+addi $sp,$sp,4
+addi $sp,$sp,0 #消参
+addi $sp,$sp,-4 # 存函数$v0
+sw $v0,0($sp)
+addi $sp,$sp,-4
+sw $ra,0($sp)
+
+jal tRue
+
+lw $ra,0($sp)
+addi $sp,$sp,4
+addi $sp,$sp,0 #消参
+addi $sp,$sp,-4 # 存函数$v0
+sw $v0,0($sp)
+lw $v1,4($sp)
+addi $sp,$sp,8 # 取函数$v0,$v1
+mul $t0,$v1,$v0
+lw $t8,0($sp)
+add $t0,$t8,$t0
+sw $t0,0($sp)
+lw $t8,0($sp)
+addi $sp,$sp,-4 # 存printf数值
+sw $t8,0($sp)
+lw $a0,0($sp)
+li $v0,1
+syscall
+la $a0,str_0
+li $v0,4
+syscall
+addi $sp,$sp,4 # printf加回%d
+lw $t8,0($sp)
+bgt $t8,48,label_23
+li $t0,0
+j label_24
+label_23:
+li $t0,1
+label_24:
+beqz $t0,label_25 # 条件值为此寄存器
+j label_22
+addi $sp,$sp,0
+label_25:
+addi $sp,$sp,0
+j label_21
+label_22:
+addi $sp,$sp,-4
+sw $ra,0($sp)
+
+jal tRue
+
+lw $ra,0($sp)
+addi $sp,$sp,4
+addi $sp,$sp,0 #消参
+addi $sp,$sp,-4 # 存函数$v0
+sw $v0,0($sp)
+addi $sp,$sp,4 # 取函数$v0
+lw $t8,0($sp)
+div $t8,$v0
+mfhi $t0
+move $v0,$t0
+addi $sp,$sp,4 # int 减去局部变量
+jr $ra
+
+main:
+li $v0,5
+syscall
+addi $sp,$sp,-4
+sw $v0,0($sp)
+label_26:
+lw $t8,0($sp)
+li $t9,100005
+div $t8,$t9
+mfhi $t0
+addi $sp,$sp,-4 # 存寄存器
+sw $t0,0($sp)
+addi $sp,$sp,-4
+sw $ra,0($sp)
+
+jal tRue
+
+lw $ra,0($sp)
+addi $sp,$sp,4
+addi $sp,$sp,0 #消参
+lw $t0,0($sp) # 取寄存器
+addi $sp,$sp,4
+addi $sp,$sp,-4 # 存函数$v0
+sw $v0,0($sp)
+move $v1,$v0
+addi $sp,$sp,-4 # 存寄存器
+sw $t0,0($sp)
+addi $sp,$sp,-4
+sw $ra,0($sp)
+
+jal fAlse
+
+lw $ra,0($sp)
+addi $sp,$sp,4
+addi $sp,$sp,0 #消参
+lw $t0,0($sp) # 取寄存器
+addi $sp,$sp,4
+addi $sp,$sp,-4 # 存函数$v0
+sw $v0,0($sp)
+lw $v1,4($sp)
+addi $sp,$sp,8 # 取函数$v0,$v1
+add $t1,$v1,$v0
+blt $t0,$t1,label_27
+li $t1,0
+j label_28
+label_27:
+li $t1,1
+label_28:
+beqz $t1,label_29 # 条件值为此寄存器
+addi $sp,$sp,-4
+sw $ra,0($sp)
+
+jal tRue
+
+lw $ra,0($sp)
+addi $sp,$sp,4
+addi $sp,$sp,0 #消参
+addi $sp,$sp,-4 # 存函数$v0
+sw $v0,0($sp)
+move $v1,$v0
+addi $sp,$sp,4 # 取函数$v0
+addi $sp,$sp,-4 # 存printf数值
+sw $v0,0($sp)
+lw $a0,0($sp)
+li $v0,1
+syscall
+la $a0,str_0
+li $v0,4
+syscall
+addi $sp,$sp,4 # printf加回%d
+lw $t8,0($sp)
+add $t0,$t8,100
+sw $t0,0($sp)
+label_30:
+lw $t8,0($sp)
+li $t9,100005
+div $t8,$t9
+mflo $t0
+add $t0,$t0,100005
+addi $sp,$sp,-4 # 存寄存器
+sw $t0,0($sp)
+addi $sp,$sp,-4
+sw $ra,0($sp)
+
+jal tRue
+
+lw $ra,0($sp)
+addi $sp,$sp,4
+addi $sp,$sp,0 #消参
+lw $t0,0($sp) # 取寄存器
+addi $sp,$sp,4
+addi $sp,$sp,-4 # 存函数$v0
+sw $v0,0($sp)
+move $v1,$v0
+addi $sp,$sp,-4 # 存寄存器
+sw $t0,0($sp)
+addi $sp,$sp,-4
+sw $ra,0($sp)
+
+jal fAlse
+
+lw $ra,0($sp)
+addi $sp,$sp,4
+addi $sp,$sp,0 #消参
+lw $t0,0($sp) # 取寄存器
+addi $sp,$sp,4
+addi $sp,$sp,-4 # 存函数$v0
+sw $v0,0($sp)
+lw $v1,4($sp)
+addi $sp,$sp,8 # 取函数$v0,$v1
+add $t1,$v1,$v0
+blt $t0,$t1,label_31
+li $t1,0
+j label_32
+label_31:
+li $t1,1
+label_32:
+beqz $t1,label_33 # 条件值为此寄存器
+lw $t8,0($sp)
+sub $t0,$t8,1
+sw $t0,0($sp)
+addi $sp,$sp,-4
+sw $ra,0($sp)
+
+jal tRue
+
+lw $ra,0($sp)
+addi $sp,$sp,4
+addi $sp,$sp,0 #消参
+addi $sp,$sp,-4 # 存函数$v0
+sw $v0,0($sp)
+move $v1,$v0
+lw $v0,0($sp)
+addi $sp,$sp,4 # 取函数$v0
+lw $t8,0($sp)
+add $t0,$v0,$t8
+addi $sp,$sp,-4 # 存printf数值
+sw $t0,0($sp)
+lw $a0,0($sp)
+li $v0,1
+syscall
+la $a0,str_0
+li $v0,4
+syscall
+addi $sp,$sp,4 # printf加回%d
+label_34:
+lw $t8,0($sp)
+li $t9,100005
+div $t8,$t9
+mflo $t0
+addi $sp,$sp,-4 # 存寄存器
+sw $t0,0($sp)
+addi $sp,$sp,-4
+sw $ra,0($sp)
+
+jal tRue
+
+lw $ra,0($sp)
+addi $sp,$sp,4
+addi $sp,$sp,0 #消参
+lw $t0,0($sp) # 取寄存器
+addi $sp,$sp,4
+addi $sp,$sp,-4 # 存函数$v0
+sw $v0,0($sp)
+move $v1,$v0
+addi $sp,$sp,-4 # 存寄存器
+sw $t0,0($sp)
+addi $sp,$sp,-4
+sw $ra,0($sp)
+
+jal fAlse
+
+lw $ra,0($sp)
+addi $sp,$sp,4
+addi $sp,$sp,0 #消参
+lw $t0,0($sp) # 取寄存器
+addi $sp,$sp,4
+addi $sp,$sp,-4 # 存函数$v0
+sw $v0,0($sp)
+lw $v1,4($sp)
+addi $sp,$sp,8 # 取函数$v0,$v1
+add $t1,$v1,$v0
+blt $t0,$t1,label_35
+li $t1,0
+j label_36
+label_35:
+li $t1,1
+label_36:
+beqz $t1,label_37 # 条件值为此寄存器
+lw $t8,0($sp)
+sub $t0,$t8,1
+sw $t0,0($sp)
+addi $sp,$sp,-4
+sw $ra,0($sp)
+
+jal tRue
+
+lw $ra,0($sp)
+addi $sp,$sp,4
+addi $sp,$sp,0 #消参
+addi $sp,$sp,-4 # 存函数$v0
+sw $v0,0($sp)
+move $v1,$v0
+lw $v0,0($sp)
+addi $sp,$sp,4 # 取函数$v0
+lw $t8,0($sp)
+add $t0,$v0,$t8
+addi $sp,$sp,-4 # 存printf数值
+sw $t0,0($sp)
+lw $a0,0($sp)
+li $v0,1
+syscall
+la $a0,str_0
+li $v0,4
+syscall
+addi $sp,$sp,4 # printf加回%d
+addi $sp,$sp,0
+j label_34
+label_37:
+addi $sp,$sp,0
+j label_30
+label_33:
+addi $sp,$sp,0
+j label_26
+label_29:
+lw $t8,0($sp)
+addi $sp,$sp,-4 # 存printf数值
+sw $t8,0($sp)
+lw $a0,0($sp)
+li $v0,1
+syscall
+la $a0,str_0
+li $v0,4
+syscall
+addi $sp,$sp,4 # printf加回%d
+addi $sp,$sp,4
+li $v0,10
+syscall
